@@ -1,0 +1,69 @@
+# Source: argo-cd/templates/argocd-server/applications.yaml
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: argocd
+      namespace: argocd
+    spec:
+      project: argocd
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - ../custom-values.yaml
+          version: v3
+        path: argocd-install/argo-cd
+        repoURL: https://github.com/antonio-tolentino/argocd.git
+        targetRevision: HEAD
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+  - apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: argocd-apps
+      namespace: argocd
+    spec:
+      project: argocd
+      source:
+        directory:
+          jsonnet: {}
+          recurse: true
+        path: argocd-apps
+        repoURL: https://github.com/antonio-tolentino/argocd.git
+        targetRevision: HEAD
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+  - apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: argocd-appprojects
+      namespace: argocd
+    spec:
+      project: argocd
+      source:
+        directory:
+          jsonnet: {}
+          recurse: true
+        path: argocd-appprojects
+        repoURL: https://github.com/antonio-tolentino/argocd.git
+        targetRevision: HEAD
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
