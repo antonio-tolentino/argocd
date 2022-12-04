@@ -3,7 +3,7 @@ server:
   config:
     repositories: |
       - type: git
-        url: https://github.com:antonio-tolentino/argocd.git
+        url: https://github.com/antonio-tolentino/argocd.git
       - name: argo-helm
         type: helm
         url: https://argoproj.github.io/argo-helm
@@ -21,7 +21,7 @@ server:
           - values.yaml
           - ../custom-values.yaml
         path: argocd-install/argo-cd
-        repoURL: https://github.com:antonio-tolentino/argocd.git
+        repoURL: https://github.com/antonio-tolentino/argocd.git
         targetRevision: HEAD
       syncPolicy:
         syncOptions:
@@ -34,7 +34,7 @@ server:
       project: argocd
       source:
         path: argocd-apps
-        repoURL: https://github.com:antonio-tolentino/argocd.git
+        repoURL: https://github.com/antonio-tolentino/argocd.git
         targetRevision: HEAD
         directory:
           recurse: true
@@ -51,7 +51,7 @@ server:
       project: argocd
       source:
         path: argocd-appprojects
-        repoURL: https://github.com:antonio-tolentino/argocd.git
+        repoURL: https://github.com/antonio-tolentino/argocd.git
         targetRevision: HEAD
         directory:
           recurse: true
