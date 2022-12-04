@@ -1,0 +1,10 @@
+configs:
+  cm:
+    create: true
+  repositories:
+    - name: apps-repo
+      type: git
+      url: https://github.com/antonio-tolentino/argocd.git
+    - name: argo-helm
+      type: helm
+      url: https://argoproj.github.io/argo-helm
